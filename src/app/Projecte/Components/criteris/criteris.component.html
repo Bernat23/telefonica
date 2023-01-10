@@ -1,0 +1,18 @@
+<h3>Criteris</h3>
+<form [formGroup]="form"(ngSubmit)="onSubmit()">
+  <label>Criteri</label>
+  <input type="text" formControlName='criteri'><br>
+  <button [disabled]="!this.form.valid">Afegir Criteri</button>
+</form>
+
+<br>
+<div *ngIf="criteris.length > 0">
+  <h2>Llista de criteris</h2>
+  <span *ngFor="let criteri of criteris">
+    <p>{{ criteri }}</p>
+  </span>
+</div>
+<form [formGroup] ="formBorrar"(ngSubmit)="borrarCriteri()">
+  <input type="text" formControlName="criteri"><br>
+  <button [disabled]="!this.formBorrar.valid">Eliminar criteri</button>
+</form>
