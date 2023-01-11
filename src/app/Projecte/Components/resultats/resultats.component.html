@@ -11,7 +11,7 @@
             <td>{{criteri}}</td>
             <td *ngFor="let numero of numeros">
                 <div *ngFor="let valoracio of valoracions[i].valoracions">
-                    <span (click)="seleccionat(numero, criteri)" *ngIf="valoracio.nota == numero">{{valoracio.opinio}}</span>
+                    <span (click)="seleccionat(numero, criteri)"  *ngIf="valoracio.nota == numero" [ngClass]="{'seleccionat': valoracio.seleccionat}">{{valoracio.opinio}}</span>
                 </div>
             </td>
         </tr>

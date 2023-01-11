@@ -71,6 +71,12 @@ export class ResultatsComponent implements OnInit {
     console.log(this.resultat);
     while(!votat && i < this.resultat.length) {
       if(criteri == this.resultat[i].criteri) {
+        this.valoracions[i].valoracions.forEach(valoracio => {
+          valoracio.seleccionat = false;
+          if(nota == valoracio.nota) {
+            valoracio.seleccionat = true;
+          }
+       });
         this.resultat[i].nota = nota;
       }
       i++;
@@ -79,6 +85,17 @@ export class ResultatsComponent implements OnInit {
     if(this.mostrar) {
       this.mostrarNotaMitjana();
     }
+    console.log(this.valoracions);
+    this.guardarResultat();
+    this.guardarValoracions();
+  }
+
+  guardarValoracions() {
+    localStorage.setItem('valoracions', JSON.stringify(this.valoracions));
+  }
+
+  guardarResultat() {
+    localStorage.setItem('resultat', JSON.stringify(this.resultat));
   }
 
   comprovarSiTotesEstanCompletades(): void{
@@ -99,16 +116,21 @@ export class ResultatsComponent implements OnInit {
     let total: number = 0;
     let nota: number = 0;
     for(let i = 0; i < this.valoracions.length; i++){
+      let notaMaxima : number = 0;
       for(let j = 0; j < this.valoracions[i].valoracions.length; j++) {
-        if(j-1 == this.valoracions[i].valoracions.length){
-          total += this.valoracions[i].valoracions[j].nota;
+        if(this.valoracions[i].valoracions[j].nota > notaMaxima){
+          notaMaxima = this.valoracions[i].valoracions[j].nota;
         }
       }
+      total += notaMaxima;
     }
     for(let i = 0; i < this.resultat.length; i++){
       nota += this.resultat[i].nota;
     }
-    return nota / total;
+    
+    return Number((nota * 10 / total).toFixed(2));
   }
+
+  
 
 }
