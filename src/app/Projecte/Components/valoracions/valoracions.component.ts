@@ -57,7 +57,7 @@ export class ValoracionsComponent implements OnInit {
     let not = this.formValoracio.get('nota')?.value;
     let opi = this.formValoracio.get('opinio')?.value;
     for(let i = 0; i < this.valoracions.length; i++) {
-      if(this.valoracions[i].criteri == crit) {
+      if(this.valoracions[i].criteri == crit && !this.comprovarValoracio(not, crit)) {
         this.valoracions[i].valoracions.push(new Valoracio(not, opi));
       }
     }
@@ -67,6 +67,33 @@ export class ValoracionsComponent implements OnInit {
 
   guardarValoracions():void{
     localStorage.setItem("valoracions", JSON.stringify(this.valoracions));
+  }
+
+  comprovarValoracio(nota:number, criteri: string): boolean {
+    let trobat: boolean= false;
+    let i : number = 0;
+    while(!trobat && i < this.valoracions.length) {
+      if(this.valoracions[i].criteri == criteri) {
+        let valoracions = this.valoracions[i].valoracions; 
+        trobat = this.comprovarNota(valoracions, nota);
+      }
+      i++;
+    }
+    return trobat;
+  }
+
+  comprovarNota(valoracions:Valoracio[], nota: number): boolean {
+    let trobat: boolean= false;
+    let i : number = 0;
+    while(!trobat && i < valoracions.length){
+      if(valoracions[i].nota == nota){
+        trobat = true;
+        console.log("La nota ja existeix!");
+        
+      }
+      i++;
+    }
+    return trobat;
   }
   
 }

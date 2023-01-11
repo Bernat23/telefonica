@@ -1,1 +1,22 @@
-<p>resultats works!</p>
+<h1>Rúbrica</h1>
+<table>
+    <thead>
+        <tr>
+          <th></th>
+          <th *ngFor="let numero of numeros">{{ numero }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let criteri of criteris;let i = index">
+            <td>{{criteri}}</td>
+            <td *ngFor="let numero of numeros">
+                <div *ngFor="let valoracio of valoracions[i].valoracions">
+                    <span (click)="seleccionat(numero, criteri)" *ngIf="valoracio.nota == numero">{{valoracio.opinio}}</span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <div *ngIf="result != undefined">{{result}}</div>

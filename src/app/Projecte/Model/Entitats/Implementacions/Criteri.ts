@@ -1,5 +1,6 @@
 import { ICriteri } from "../Interfaces/ICriteri";
 
 export class Criteri implements ICriteri{
-    criteri!: string;    
+    criteri!: string;  
+    seleccionat !: boolean;  
 }

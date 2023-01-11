@@ -1,11 +1,18 @@
 <form [formGroup]="formValoracio" (ngSubmit)="onSubmit()">
-    <label>Valoració</label><br>
-    <label>Criteri</label>
-    <input type="text" formControlName='criteri'><br>
-    <label>Nota</label>
-    <input type="number" formControlName='nota'><br>
-    <label>Opinió</label>
-    <input type="text" formControlName='opinio'>
-    <br>
-    <button [disabled]="!this.formValoracio.valid">Afegir Criteri</button>
-  </form>
+  <label>Valoració</label><br>
+  <label>Criteri</label>
+  <input type="text" formControlName='criteri'><br>
+  <label>Nota</label>
+  <input type="number" formControlName='nota'><br>
+  <label>Opinió</label>
+  <input type="text" formControlName='opinio'>
+  <br>
+  <button [disabled]="!this.formValoracio.valid">Afegir Criteri</button>
+</form>
+
+<div *ngIf="criteris.length > 0">
+  <h2>Llista de criteris</h2>
+  <span *ngFor="let criteri of criteris">
+    <p>{{ criteri }}</p>
+  </span>
+</div>
